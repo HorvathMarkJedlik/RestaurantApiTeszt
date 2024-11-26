@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const restaurantController = require('../controllers/restaurant.controller')
 
-const restazrantSchema = mongoose.Schema(
+const restaurantSchema = mongoose.Schema(
     {
         "address": {
           "building": {

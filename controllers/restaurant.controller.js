@@ -2,7 +2,10 @@
 const restaurantModel = require('../models/restaurantModel')
 
 
-module.exports = getAllRestaurant = () =>{
+const getAllRestaurant =  () =>{
     const ettermek = restaurantModel.find()
 }
 
+module.exports = {
+    getAllRestaurant
+}
