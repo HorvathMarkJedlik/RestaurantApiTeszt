@@ -1,4 +1,4 @@
-module.exports = getAllRestaurant = (req, res, next) =>{
-    res.json({msg: "Helló"})
+module.exports = getAllRestaurant = () =>{
+    const ettermek = Model.find()
 }
 

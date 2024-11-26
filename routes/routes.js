@@ -3,6 +3,6 @@ const getAllRestaurant = require("../controllers/restaurant.controller")
 
 const router = express.Router()
 
-router.post('/', getAllRestaurant)
+router.get('/', getAllRestaurant)
 
 module.exports = router

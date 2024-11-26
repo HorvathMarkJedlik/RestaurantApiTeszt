@@ -1,7 +1,8 @@
-const createRestaurant = require('../controllers/restaurant.controller')
+const { type } = require('express/lib/response')
+const getAllRestaurants = require('../controllers/restaurant.controller')
 
-describe('TodoController.createTodo metódus tesztelése', () => {
-    beforeEach(()=>{
-        req.body = newTodo
+describe('A getAll végponthoz tartozó metódus tesztelése', () => {
+    it('A getAllRestaurants függvénynek léteznie kell', () =>{
+        expect(typeof getAllRestaurants).toBe('function')
     })
 })
