@@ -1,4 +1,8 @@
+
+const restaurantModel = require('../models/restaurantModel')
+
+
 module.exports = getAllRestaurant = () =>{
-    const ettermek = Model.find()
+    const ettermek = restaurantModel.find()
 }
 
