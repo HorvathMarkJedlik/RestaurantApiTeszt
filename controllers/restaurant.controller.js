@@ -2,7 +2,7 @@
 const restaurantModel = require('../models/restaurantModel')
 
 
-const getAllRestaurant =  () =>{
+const getAllRestaurant =  (req, res, next) =>{
     const ettermek = restaurantModel.find()
 }
 

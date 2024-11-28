@@ -1,3 +1,4 @@
+const httpMocks = require('node-mocks-http')
 const restaurantController = require('../controllers/restaurant.controller')
 const restaurantModel = require('../models/restaurantModel')
 
@@ -9,7 +10,11 @@ describe('A getAll végponthoz tartozó metódus tesztelése', () => {
         expect(typeof restaurantController.getAllRestaurant).toBe('function')
     })
     it('A getAllRestaurant függvényben meg kellene hívni a model find() függvényét', () =>{
-        restaurantController.getAllRestaurant()
+        let req, res, next
+        req = httpMocks.createRequest()
+        res = httpMocks.createResponse()
+        next = null
+        restaurantController.getAllRestaurant(req, res, next)
         expect(restaurantModel.find).toHaveBeenCalled()
     })
 })

@@ -12,7 +12,8 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.2",
+    "node-mocks-http": "^1.16.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
