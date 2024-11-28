@@ -1,6 +1,7 @@
 const httpMocks = require('node-mocks-http')
 const restaurantController = require('../controllers/restaurant.controller')
 const restaurantModel = require('../models/restaurantModel')
+const restaurantList = require('./mock-data/allRestaurants.json')
 
 restaurantModel.find = jest.fn()
 
@@ -16,5 +17,8 @@ describe('A getAll végponthoz tartozó metódus tesztelése', () => {
         next = null
         restaurantController.getAllRestaurant(req, res, next)
         expect(restaurantModel.find).toHaveBeenCalled()
+    })
+    it('A getAllRestaurant függvénynek vissza kellene adjon egy json listát az összes étteremmel és egy 200-as státuszkódot', ()=>{
+        restaurantModel.find.mockReturnValue(restaurantList)
     })
 })
