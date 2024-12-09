@@ -25,5 +25,8 @@ describe('A getAll végponthoz tartozó metódus tesztelése', () => {
         restaurantModel.find.mockReturnValue(restaurantList)
         await restaurantController.getAllRestaurant(req, res, next)
         expect(res.statusCode).toBe(200)
+        expect(res._isEndCalled()).toBeTruthy()
+        expect(res._getJSONData()).toStrictEqual(restaurantList)
     })
+    it('Hiba esetén 500-as kóddal kellene visszat')
 })
