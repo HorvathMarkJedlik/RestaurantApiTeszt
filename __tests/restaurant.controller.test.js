@@ -39,4 +39,8 @@ describe('A create végponthoz tartozó metódus tesztelése', () => {
     it('A createRestaurant-nak függvénynek kéne lennie', () =>{
         expect(typeof restaurantController.createRestaurant).toBe('function')
     })
+    // it('A createRestaurant függvényben meg kellene hívni a model find() függvényét', () =>{
+    //     restaurantController.createRestaurant(req, res)
+    //     expect(restaurantModel.create).toHaveBeenCalledWith(newRestaurant)
+    // })
 })
