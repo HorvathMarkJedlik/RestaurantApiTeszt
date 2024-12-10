@@ -1,10 +1,10 @@
-const express = require('express')
-const routes = require('./routes/routes')
-const server = express()
+const express = require('express');
+const routes = require('./routes/routes'); // A routes.js importálása
+const server = express();
 
-server.use(express.json()) // A POST-ban a request.body-ban JSON típusú adatok tudunk átadn.
-server.use('/api', routes)
+server.use(express.json()); // JSON típusú adatok fogadása
+server.use('/api', routes); // Az /api útvonalakat a routes.js kezeli
 
-server.listen(3000, ()=>{
-    console.log('A szerver elindult...');
-})
+server.listen(3000, () => {
+    console.log('A szerver elindult a 3000-es porton...');
+});

@@ -2,8 +2,10 @@ const httpMocks = require('node-mocks-http')
 const restaurantController = require('../controllers/restaurant.controller')
 const restaurantModel = require('../models/restaurantModel')
 const restaurantList = require('./mock-data/allRestaurants.json')
+const newRestaurant = require('./mock-data/newRestaurant.json')
 
 restaurantModel.find = jest.fn()
+restaurantModel.create = jest.fn()
 let req, res, next
 
 beforeEach(()=>{
@@ -28,5 +30,13 @@ describe('A getAll végponthoz tartozó metódus tesztelése', () => {
         expect(res._isEndCalled()).toBeTruthy()
         expect(res._getJSONData()).toStrictEqual(restaurantList)
     })
-    it('Hiba esetén 500-as kóddal kellene visszat')
+})
+
+describe('A create végponthoz tartozó metódus tesztelése', () => {
+    beforeEach(()=>{
+        req.body = newRestaurant
+    })
+    it('A createRestaurant-nak függvénynek kéne lennie', () =>{
+        expect(typeof restaurantController.createRestaurant).toBe('function')
+    })
 })
