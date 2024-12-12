@@ -4,9 +4,11 @@ const restaurantModel = require('../models/restaurantModel');
 const restaurantList = require('./mock-data/allRestaurants.json');
 const newRestaurant = require('./mock-data/newRestaurant.json');
 
-restaurantModel.findById = jest.fn();
+
 restaurantModel.find = jest.fn();
 restaurantModel.create = jest.fn();
+restaurantModel.findById = jest.fn();
+restaurantModel.updateRestaurant = jest.fn();
 
 let req, res, next;
 
@@ -29,13 +31,15 @@ describe('A getAll végponthoz tartozó metódus tesztelése', () => {
         expect(restaurantModel.find).toHaveBeenCalled();
     });
 
-    it('A getAllRestaurant függvénynek vissza kellene adjon egy json listát az összes étteremmel és egy 200-as státuszkódot', async () => {
+    it('A getAllRestaurant függvénynek vissza kellene adjon egy json listát az összes étteremmel', async () => {
         restaurantModel.find.mockReturnValue(restaurantList);
         await restaurantController.getAllRestaurant(req, res, next);
-        expect(res.statusCode).toBe(200);
         expect(res._isEndCalled()).toBeTruthy();
         expect(res._getJSONData()).toStrictEqual(restaurantList);
     });
+    it('A getAllReestaurant függvény 200-as státuszkóddal kéne, hogy visszatérjen', async () =>{
+        expect(res.statusCode).toBe(200);
+    })  
 });
 
 describe('A create végponthoz tartozó metódus tesztelése', () => {
@@ -91,3 +95,9 @@ describe('A getRestaurantById végponthoz tartozó metódus tesztelése', () => 
     });
 });
 
+describe('Az updateRestaurant végponthoz tartozó metódus tesztelése', () => {
+    it('Az updateRestaurant függvénynek léteznie kell', () => {
+        expect(typeof restaurantController.updateRestaurant).toBe('function');
+    });
+
+});

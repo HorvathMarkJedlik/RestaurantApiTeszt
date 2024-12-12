@@ -27,8 +27,25 @@ const getRestaurantById = async (req, res) => {
     }
 };
 
+const updateRestaurant = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const updatedRestaurant = await restaurantModel.findByIdAndUpdate(id, req.body, {
+            new: true, 
+            runValidators: true, 
+        });
+        if (!updatedRestaurant) {
+            return res.status(404).send('Nincs ilyen étterem');
+        }
+        res.status(200).json(updatedRestaurant);
+    } catch (error) {
+        res.status(500).send('Szerver hiba');
+    }
+};
+
 module.exports = {
     getAllRestaurant,
     createRestaurant,
-    getRestaurantById
+    getRestaurantById,
+    updateRestaurant,
 };
