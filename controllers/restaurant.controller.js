@@ -1,45 +1,66 @@
 const restaurantModel = require('../models/restaurantModel');
 
-const getAllRestaurant = (req, res, next) => {
+const getAllRestaurant = async (req, res, next) => {
     try {
-        const ettermek = restaurantModel.find();
+        const ettermek = await restaurantModel.find();
         res.status(200).json(ettermek);
     } catch (error) {
-        res.status(500).send("Szerver hiba");
+        next(error);
     }
 };
 
-const createRestaurant = async (req, res) => {
-    const newRestaurant = await restaurantModel.create(req.body);
-    res.status(201).json(newRestaurant);
-};
-
-const getRestaurantById = async (req, res) => {
+const createRestaurant = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const restaurant = await restaurantModel.findById(id);
-        if (!restaurant) {
-            return res.status(404).send('Nincs ilyen étterem');
-        }
-        res.status(200).json(restaurant);
+        const newRestaurant = await restaurantModel.create(req.body);
+        res.status(201).json(newRestaurant);
     } catch (error) {
-        res.status(500).send('Szerver hiba');
+        next(error); 
     }
 };
 
-const updateRestaurant = async (req, res) => {
-    const { id } = req.params;
+const getRestaurantById = async (req, res, next) => {
     try {
-        const updatedRestaurant = await restaurantModel.findByIdAndUpdate(id, req.body, {
-            new: true, 
-            runValidators: true, 
-        });
-        if (!updatedRestaurant) {
-            return res.status(404).send('Nincs ilyen étterem');
+        const data = await restaurantModel.findById(req.params.restaurantId);
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).send();
         }
-        res.status(200).json(updatedRestaurant);
     } catch (error) {
-        res.status(500).send('Szerver hiba');
+        next(error); 
+    }
+};
+
+const updateRestaurant = async (req, res, next) => {
+    try {
+        const updatedRestaurant = await restaurantModel.findByIdAndUpdate(
+            req.params.restaurantId,
+            req.body,
+            {
+                new: true,
+                useFindAndModify: false,
+            }
+        );
+        if (updatedRestaurant) {
+            res.status(200).json(updatedRestaurant);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        next(error); 
+    }
+};
+
+const deleteRestaurant = async (req, res, next) => {
+    try {
+        const deleteRestaurant = await restaurantModel.findByIdAndDelete(req.params.restaurantId);
+        if (deleteRestaurant) {
+            res.status(200).json(deleteRestaurant);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        next(error); 
     }
 };
 
@@ -48,4 +69,5 @@ module.exports = {
     createRestaurant,
     getRestaurantById,
     updateRestaurant,
+    deleteRestaurant
 };
