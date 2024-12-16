@@ -15,7 +15,7 @@ router.get('/:id', restaurantController.getRestaurantById);
 // PUT kérés egy adott étterem frissítésére ID alapján
 router.put('/:id', restaurantController.updateRestaurant);
 
-// Post
-router.post('/', restaurantController.deleteRestaurant);
+// DELETE kérés egy adott étterem törlésére ID alapján
+router.delete('/:id', restaurantController.deleteRestaurant);
 
 module.exports = router;
