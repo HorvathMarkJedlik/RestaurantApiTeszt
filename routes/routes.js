@@ -1,10 +1,18 @@
 const express = require('express');
-const getAllRestaurant = require('../controllers/restaurant.controller'); // A vezérlő importálása
+const restaurantController = require('../controllers/restaurant.controller'); // A vezérlő importálása
 
 const router = express.Router();
 
 // GET kérés az összes étterem lekérdezésére
-router.get('/', getAllRestaurant);
-router.post('/', getAllRestaurant.createRestaurant);
+router.get('/', restaurantController.getAllRestaurant);
+
+// POST kérés új étterem létrehozására
+router.post('/', restaurantController.createRestaurant);
+
+// GET kérés egy adott étterem lekérdezésére ID alapján
+router.get('/:id', restaurantController.getRestaurantById);
+
+// PUT kérés egy adott étterem frissítésére ID alapján
+router.put('/:id', restaurantController.updateRestaurant);
 
 module.exports = router;
